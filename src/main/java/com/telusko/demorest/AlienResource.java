@@ -1,33 +1,34 @@
 package com.telusko.demorest;
 
+import java.util.List;
+
+import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
+import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 
-import java.util.Arrays;
-import java.util.List;
-
 @Path("aliens")
 public class AlienResource {
 
+    AlienRepository repo = new AlienRepository();
+
     @GET
+    @Path("alien")
     @Produces(MediaType.APPLICATION_XML)
-    public Aliens getAlien() {
+    public List<Alien> getAlien() {
+        return repo.getAliens();
+    }
 
-        Alien a1 = new Alien();
-        a1.setName("Harsh");
-        a1.setPoints(99);
+    @POST
+    @Path("alien")
+    @Consumes(MediaType.APPLICATION_XML)
+    @Produces(MediaType.APPLICATION_XML)
+    public Alien createAlien(Alien a) {
 
-        Alien a2 = new Alien();
-        a2.setName("Chanchu");
-        a2.setPoints(100);
+        repo.create(a);
 
-        List<Alien> list = Arrays.asList(a1, a2);
-
-        Aliens aliens = new Aliens();
-        aliens.setAliens(list);
-
-        return aliens;
+        return a;
     }
 }
