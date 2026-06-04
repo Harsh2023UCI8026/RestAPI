@@ -18,14 +18,14 @@ public class AlienResource {
 
     // GET /aliens
     @GET
-    @Produces(MediaType.APPLICATION_XML)
+    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public List<Alien> getAliens() {
         return repo.getAliens();
     }
     
     @GET
     @Path("alien/{id}")
-    @Produces(MediaType.APPLICATION_XML)
+    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public Alien getAliens(@PathParam("id") int id) {
         return repo.getAlien(id);
     }
@@ -33,7 +33,7 @@ public class AlienResource {
     // GET /aliens/alien
     @GET
     @Path("alien")
-    @Produces(MediaType.APPLICATION_XML)
+    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML}) 
     public List<Alien> getAlien() {
         return repo.getAliens();
     }
@@ -41,8 +41,8 @@ public class AlienResource {
 
     // POST /aliens
     @POST
-    @Consumes(MediaType.APPLICATION_XML)
-    @Produces(MediaType.APPLICATION_XML)
+    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON}) 
+    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})  
     public Alien createAlien1(Alien a) {
         repo.create(a);
         return a;
@@ -51,8 +51,8 @@ public class AlienResource {
     // POST /aliens/alien
     @POST
     @Path("alien")
-    @Consumes(MediaType.APPLICATION_XML)
-    @Produces(MediaType.APPLICATION_XML)
+    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})   
     public Alien createAlien2(Alien a) {
         repo.create(a);
         return a;
